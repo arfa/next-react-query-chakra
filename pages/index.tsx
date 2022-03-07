@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import styles from '@/pages/index.module.css'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -21,6 +22,13 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
+          <Link href="/about">
+            <a className={styles.card}>
+              <h2>About Page &rarr;</h2>
+              <p>Cypress will test if this link is working.</p>
+            </a>
+          </Link>
+
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
