@@ -14,6 +14,8 @@ const customJestConfig = {
 
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
+  testMatch: ['<rootDir>/components/**/?(*.)+(spec|test).ts?(x)'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/cypress/'],
   testEnvironment: 'jest-environment-jsdom',
 };
 
