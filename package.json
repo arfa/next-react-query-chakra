@@ -10,7 +10,9 @@
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless"
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@chakra-ui/react": "1.8.6",
@@ -22,14 +24,23 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@babel/core": "7.17.5",
+    "@storybook/addon-actions": "6.4.19",
+    "@storybook/addon-essentials": "6.4.19",
+    "@storybook/addon-links": "6.4.19",
+    "@storybook/builder-webpack5": "6.4.19",
+    "@storybook/manager-webpack5": "6.4.19",
+    "@storybook/react": "6.4.19",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
     "@types/react": "17.0.38",
     "babel-jest": "27.4.5",
+    "babel-loader": "8.2.3",
     "cypress": "9.5.1",
     "eslint": "8.5.0",
     "eslint-config-next": "latest",
+    "eslint-plugin-storybook": "0.5.7",
     "eslint-plugin-testing-library": "5.0.1",
     "jest": "27.4.5",
     "start-server-and-test": "1.14.0",
