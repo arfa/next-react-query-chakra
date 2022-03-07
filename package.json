@@ -15,7 +15,8 @@
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook -s public",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "chromatic": "npx chromatic --project-token=e42d89f15498"
   },
   "lint-staged": {
     "*.ts, tsx, js, jsx": [
@@ -49,6 +50,7 @@
     "@types/react": "17.0.38",
     "babel-jest": "27.4.5",
     "babel-loader": "8.2.3",
+    "chromatic": "6.5.1",
     "cypress": "9.5.1",
     "eslint": "8.5.0",
     "eslint-config-next": "latest",
