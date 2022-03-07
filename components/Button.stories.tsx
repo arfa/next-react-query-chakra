@@ -23,5 +23,3 @@ Primary.args = {
   variant: 'solid',
   size: 'md',
 };
-
-

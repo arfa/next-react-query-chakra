@@ -23,19 +23,9 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
-export const ChakraButton = ({
-  variant = 'outline',
-  size = 'md',
-  label,
-  ...props
-}: ButtonProps) => {
+export const ChakraButton = ({ variant = 'outline', size = 'md', label, ...props }: ButtonProps) => {
   return (
-    <Button
-      type="button"
-      variant={variant}
-      size={size}
-      {...props}
-    >
+    <Button type='button' variant={variant} size={size} {...props}>
       {label}
     </Button>
   );
