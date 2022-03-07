@@ -1,23 +1,32 @@
-# Next.js + Jest
+# About
 
-This example shows how to configure Jest to work with Next.js.
+[DEMO APP](https://apollo-react-query-chakra.vercel.app/)
+
+[STORYBOOK](https://master--6225fc84dc3979003aefebb4.chromatic.com)
+
+This is a boilarplate that combine `Next.JS`, `React Query`, `Storybook`, `Jest`, `React-testing-library`, `Cypress`
+
 
 This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
 
 ## How to Use
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
-
-In your terminal, run the following command:
-
+Run development server
 ```bash
-npx create-next-app --example with-jest with-jest-app
-# or
-yarn create next-app --example with-jest with-jest-app
+> npm run dev
 ```
 
-## Run Jest Tests
-
+Run storybook
 ```bash
-npm test
+> npm run storybook
+```
+
+Run jest on watch mode
+```bash
+> npm test
+```
+
+Run e2e tests
+```bash
+> npm run e2e
 ```
