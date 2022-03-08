@@ -8,6 +8,7 @@ interface MovieOverviewProps extends StackProps {
   description?: string;
   picture: string;
   title: string;
+  titleNoOfLines?: number;
 }
 
 const WIDTH_DEFAULT = { sm: '100%', md: '420px' };
@@ -18,6 +19,7 @@ export const MovieOverview = ({
   description,
   picture,
   title,
+  titleNoOfLines,
   width = WIDTH_DEFAULT,
   height = HEIGHT_DEFAULT,
 }: MovieOverviewProps) => {
@@ -38,7 +40,7 @@ export const MovieOverview = ({
         <Image objectFit='cover' boxSize='100%' src={picture} alt={`${title}`} />
       </Flex>
       <Stack flex={1} flexDirection='column' justifyContent='center' alignItems='center' p={1} pt={2}>
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
+        <Heading fontSize={'2xl'} fontFamily={'body'} noOfLines={titleNoOfLines} >
           {title}
         </Heading>
         <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>

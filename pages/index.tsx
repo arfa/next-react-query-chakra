@@ -64,6 +64,7 @@ export default function Home() {
             categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
             picture={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             title={movie.title}
+            titleNoOfLines={1}
           />
         ))}
       </Swipe>
