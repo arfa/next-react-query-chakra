@@ -7,6 +7,7 @@ import { MoviesLayout } from '@/components/movies-layout';
 import { MovieOverview } from '@/components/movie-overview';
 import Swipe from '@/components/swipe';
 import { Heading } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -21,8 +22,29 @@ export async function getStaticProps() {
 }
 
 export default function Home() {
-  const { data, isError, isLoading } = useQuery(['popularMovies'], () => getPopularMovies());
-  const { data: genres } = useQuery(['popularMovies'], () => getMoviesGenres());
+  const [page, setPage] = React.useState(1);
+
+  const {
+    data: movies,
+    isError,
+    isLoading,
+  } = useQuery(['popularMovies', page], () => getPopularMovies(page), {
+    keepPreviousData: true,
+  });
+
+  useEffect(() => {
+    setPage(2);
+  }, []);
+
+  const { data: genres } = useQuery(['genresMovies'], () => getMoviesGenres());
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
 
   return (
     <>
@@ -34,11 +56,12 @@ export default function Home() {
         TOP 10 Movies
       </Heading>
       <Swipe>
-        {data?.results?.slice(10).map((movie: any) => (
+        {movies?.results?.slice(10).map((movie: any) => (
           <MovieOverview
             width='100%'
-            key={movie.id}
-            categories={movie.genre_ids}
+            height='100%'
+            key={movie.title}
+            categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
             picture={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             title={movie.title}
           />
@@ -48,10 +71,10 @@ export default function Home() {
         Popular Movies
       </Heading>
       <MoviesLayout>
-        {data?.results?.slice(10, 40).map((movie: any) => (
+        {movies?.results?.slice(10, 40).map((movie: any) => (
           <MovieOverview
             key={movie.id}
-            categories={movie.genre_ids}
+            categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
             description={movie.overview}
             picture={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             title={movie.title}

@@ -11,6 +11,7 @@ interface MovieOverviewProps extends StackProps {
 }
 
 const WIDTH_DEFAULT = { sm: '100%', md: '420px' };
+const HEIGHT_DEFAULT = { md: '20rem' };
 
 export const MovieOverview = ({
   categories,
@@ -18,6 +19,7 @@ export const MovieOverview = ({
   picture,
   title,
   width = WIDTH_DEFAULT,
+  height = HEIGHT_DEFAULT,
 }: MovieOverviewProps) => {
   const { text } = useTextTruncate(description);
   const bgColor = useColorModeValue('blue.50', 'blue.800');
@@ -26,7 +28,7 @@ export const MovieOverview = ({
       borderWidth='1px'
       borderRadius='lg'
       width={width}
-      height={{ md: '20rem' }}
+      height={height}
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
       boxShadow={'2xl'}
@@ -40,11 +42,12 @@ export const MovieOverview = ({
           {title}
         </Heading>
         <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-          {categories.map((category) => (
-            <Badge key={category} px={2} py={1} bg={bgColor} fontWeight={'400'}>
+          {categories.map((category, index) => {
+            return (
+            <Badge key={`${category}-${index}`} px={2} py={1} bg={bgColor} fontWeight={'400'}>
               {category}
             </Badge>
-          ))}
+          )})}
         </Stack>
         {description && (
           <Text color={'gray.500'} size='sm' mb={4}>
