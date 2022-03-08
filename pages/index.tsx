@@ -52,19 +52,16 @@ export default function Home() {
         <title>Popular Movies</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Heading as='h3' size='lg' my={4}>
-        TOP 10 Movies
-      </Heading>
       <Swipe>
         {movies?.results?.slice(10).map((movie: any) => (
           <MovieOverview
-            width='100%'
+            margin='auto'
+            width={{ sm: '350px', md: 'auto' }}
             height='100%'
             key={movie.title}
             categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
             picture={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             title={movie.title}
-            titleNoOfLines={1}
           />
         ))}
       </Swipe>

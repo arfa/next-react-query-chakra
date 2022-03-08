@@ -1,12 +1,11 @@
-import styles from '@/pages/index.module.css';
 import Link from 'next/link';
 
 export default function About() {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div>
+      <main>
         <h1>About Page</h1>
-        <p className={styles.description}>
+        <p>
           <Link href='/'>
             <a>&larr; Go Back</a>
           </Link>
