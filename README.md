@@ -11,9 +11,19 @@ This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScri
 
 ## How to Use
 
-Run development server
+Starts the development server.
 ```bash
 > npm run dev
+```
+
+Builds the app for production.
+```bash
+> npm run build
+```
+
+Runs the built app in production mode.
+```bash
+> npm start
 ```
 
 Run storybook
