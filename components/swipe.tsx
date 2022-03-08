@@ -20,6 +20,7 @@ export default function Swipe({
   navigation,
   pagination = true,
   slidesPerView = 2,
+  initialSlide = 1,
 }: Props) {
   const [isMobile] = useMediaQuery('(max-width: 768px)');
 
@@ -28,6 +29,7 @@ export default function Swipe({
       centeredSlides={centeredSlides}
       effect={effect}
       grabCursor={grabCursor}
+      initialSlide={initialSlide}
       modules={[EffectCoverflow, Pagination]}
       navigation={navigation}
       pagination={pagination}
