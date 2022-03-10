@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react';
 
 interface Props extends SwiperProps {}
 
-export default function Swipe({
+export const Swipe = ({
   centeredSlides = true,
   children,
   effect = 'coverflow',
@@ -21,7 +21,7 @@ export default function Swipe({
   pagination = true,
   slidesPerView = 2,
   initialSlide = 1,
-}: Props) {
+}: Props) => {
   const [isMobile] = useMediaQuery('(max-width: 768px)');
 
   return (
@@ -47,4 +47,4 @@ export default function Swipe({
       })}
     </Swiper>
   );
-}
+};

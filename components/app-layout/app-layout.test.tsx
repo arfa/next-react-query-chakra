@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AppLayout } from '@/components/app-layout';
+import { AppLayout } from './app-layout';
 
 describe('App Layout', () => {
   it('renders Layout', () => {

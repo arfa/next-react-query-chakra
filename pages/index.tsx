@@ -3,11 +3,11 @@ import Head from 'next/head';
 import { getPopularMovies } from 'services/movies';
 import { getMoviesGenres } from 'services/genres';
 import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query';
-import { MoviesLayout } from '@/components/movies-layout';
-import { MovieOverview } from '@/components/movie-overview';
-import Swipe from '@/components/swipe';
+import { MoviesLayout } from '@/components/movies-layout/movies-layout';
+import { MovieOverview } from '@/components/movie-overview/movie-overview';
+import { Swipe } from '@/components/swipe/swipe';
 import { Heading } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();

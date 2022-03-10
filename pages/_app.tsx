@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import axios from 'axios';
-import { AppLayout } from '@/components/app-layout';
+import { AppLayout } from '@/components/app-layout/app-layout';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 axios.defaults.params = {

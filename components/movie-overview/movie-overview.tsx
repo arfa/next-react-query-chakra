@@ -1,5 +1,5 @@
 import { Badge, Flex, Heading, Image, Stack, StackProps, Text, useColorModeValue } from '@chakra-ui/react';
-import { useTextTruncate } from './hooks/use-text-truncate';
+import { useTextTruncate } from '../hooks/use-text-truncate';
 
 import React from 'react';
 
