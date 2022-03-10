@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import { getPopularMovies } from 'services/movies';
 import { getMoviesGenres } from 'services/genres';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query';
 import { MoviesLayout } from '@/components/movies-layout';
 import { MovieOverview } from '@/components/movie-overview';
 import Swipe from '@/components/swipe';
@@ -12,37 +12,38 @@ import React, { useEffect } from 'react';
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['popularMovies'], () => getPopularMovies());
+  await queryClient.prefetchInfiniteQuery(['popularMovies', 1], () => getPopularMovies({ pageParam: 1 }));
+  await queryClient.prefetchInfiniteQuery(['popularMovies', 2], () => getPopularMovies({ pageParam: 2 }));
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };
 }
 
 export default function Home() {
-  const [page, setPage] = React.useState(1);
+  const {
+    data: movies1,
+    isError: isError1,
+    isLoading: isLoading1,
+  } = useInfiniteQuery(['popularMovies', 1], () => getPopularMovies({ pageParam: 1 }));
 
   const {
-    data: movies,
-    isError,
-    isLoading,
-  } = useQuery(['popularMovies', page], () => getPopularMovies(page), {
-    keepPreviousData: true,
-  });
+    data: movies2,
+    isError: isError2,
+    isLoading: isLoading2,
+  } = useInfiniteQuery(['popularMovies', 2], () => getPopularMovies({ pageParam: 2 }));
 
-  useEffect(() => {
-    setPage(2);
-  }, []);
+  const mainMovies = [...(movies1?.pages?.[0]?.results ?? []), ...(movies2?.pages?.[0]?.results ?? [])];
 
   const { data: genres } = useQuery(['genresMovies'], () => getMoviesGenres());
 
-  if (isError) {
+  if (isError1 || isError2) {
     return <div>Error</div>;
   }
 
-  if (isLoading) {
+  if (isLoading1 || isLoading2) {
     return <div>Loading</div>;
   }
 
@@ -53,23 +54,26 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Swipe>
-        {movies?.results?.slice(10).map((movie: any) => (
-          <MovieOverview
-            margin='auto'
-            width={{ sm: '350px', md: 'auto' }}
-            height='100%'
-            key={movie.title}
-            categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
-            picture={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            title={movie.title}
-          />
-        ))}
+        {!!movies1?.pages[0] &&
+          movies1?.pages?.[0].results
+            ?.slice(10)
+            .map((movie: any) => (
+              <MovieOverview
+                margin='auto'
+                width={{ sm: '350px', md: 'auto' }}
+                height='100%'
+                key={movie.title}
+                categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
+                picture={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
+                title={movie.title}
+              />
+            ))}
       </Swipe>
       <Heading as='h3' size='lg' mt={8} mb={4}>
         Popular Movies
       </Heading>
       <MoviesLayout>
-        {movies?.results?.slice(10, 40).map((movie: any) => (
+        {mainMovies.slice(10, 40).map((movie: any) => (
           <MovieOverview
             key={movie.id}
             categories={movie.genre_ids?.map((id: number) => genres?.find((genre: any) => genre.id === id)?.name)}
