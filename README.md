@@ -1,6 +1,6 @@
 # About
 
-[DEMO APP](https://apollo-react-query-chakra.vercel.app/)
+[DEMO APP](https://next-react-query-chakra.vercel.app/)
 
 [STORYBOOK](https://master--6225fc84dc3979003aefebb4.chromatic.com)
 
